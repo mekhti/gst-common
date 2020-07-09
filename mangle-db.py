@@ -27,7 +27,7 @@ def patch(related, details):
         if e.nodeType == e.ELEMENT_NODE and e.localName == 'refentry':
             elem = e
             break
-    if elem == None:
+    if elem is None:
         return
 
     elem2 = None
@@ -38,7 +38,7 @@ def patch(related, details):
             if id and id.nodeValue.endswith('.description') and role and role.nodeValue == 'desc':
                 elem2 = e
                 break
-    if elem2 == None:
+    if elem2 is None:
         return
 
     # insert include
@@ -57,7 +57,7 @@ def patch(related, details):
     result.close()
 
 def main():
-    if not len(sys.argv) == 2:
+    if len(sys.argv) != 2:
         sys.stderr.write('Please specify the xml/ dir')
         sys.exit(1)
 
