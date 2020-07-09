@@ -80,11 +80,16 @@ if __name__ == "__main__":
                 subprocess.check_call(['git', 'add', os.path.abspath(dest)],
                                       cwd=repodir)
 
-        if options.commit_message:
-            if subprocess.call('git diff-index --quiet --cached HEAD'.split(' '), cwd=repodir) != 0:
-                subprocess.call(['git', 'commit', '-m', options.commit_message], cwd=repodir)
-                if not summary:
-                    summary = "Commited:\n"
-                summary += repodir + '\n'
+        if (
+            options.commit_message
+            and subprocess.call(
+                'git diff-index --quiet --cached HEAD'.split(' '), cwd=repodir
+            )
+            != 0
+        ):
+            subprocess.call(['git', 'commit', '-m', options.commit_message], cwd=repodir)
+            if not summary:
+                summary = "Commited:\n"
+            summary += repodir + '\n'
 
     print(summary)

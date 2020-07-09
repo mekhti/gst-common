@@ -127,9 +127,8 @@ class GDoc:
         if olddata and olddata == newdata:
             return
 
-        if olddata:
-            if backup:
-                os.rename(filename, filename + '.bak')
+        if olddata and backup:
+            os.rename(filename, filename + '.bak')
 
         handle = codecs.open(filename, "w", encoding='utf-8')
         handle.write(newdata)
